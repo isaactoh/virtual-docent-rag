@@ -1,1 +1,6 @@
+# pdf extraction
 langchain_community
+pypdf
+
+# chunking
+langchain_text_splitters
