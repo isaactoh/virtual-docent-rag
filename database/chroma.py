@@ -3,8 +3,6 @@ from sentence_transformers import SentenceTransformer
 
 client = chromadb.PersistentClient(path="./chromadb")
 
-client.delete_collection(name="my_documents")
-
 collection = client.get_or_create_collection(
     name="my_documents"
 )
@@ -16,7 +14,7 @@ def embed(chunks):
 
     ids = [f"doc_{i}" for i in range(len(chunks))]
 
-    collection.add(
+    collection.upsert(
         ids = ids,
         documents=chunks,
         embeddings=embeddings
@@ -24,7 +22,7 @@ def embed(chunks):
 
     print(f"Successfully stored {len(chunks)} chunks")
 
-def search(query, n_results = 3):
+def search_chunks(query, n_results = 3):
     query_embedding = model.encode(query).tolist()
 
     results = collection.query(

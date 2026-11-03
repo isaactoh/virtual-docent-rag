@@ -8,3 +8,6 @@ langchain_text_splitters
 #embedding
 chromadb
 sentence_transformers
+
+#inference
+openai
